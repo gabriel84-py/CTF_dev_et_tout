@@ -4,6 +4,5 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/CTF" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/CTF/CTF_dev_et_tout" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/la-formation-complete-python" vcs="Git" />
   </component>
 </project>
