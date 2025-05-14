@@ -1,0 +1,16 @@
+clé publique (N, e) : A => B 
+clé privée (N, d) : A
+
+ciphertext => C = (M^e) mod n 
+
+M = "aaaaaa" => DECIMAL
+
+N = p * q  => nb premiers
+e = nombre premier avec M et inférieur a celui ci 
+
+C = (M^e) mod n 
+
+d ≡ e^-1 (mod m)
+
+PHI = (p-1)*(q-1)
+M = (C^d) mod n

