@@ -32,6 +32,7 @@ class Game:
         self.costume = 0
         self.timer = 0
         self.explosion_liste = []
+        self.y_depart = 0
         pyxel.play(0, 0, loop=True)
         pyxel.run(self.update, self.draw)
 
@@ -40,8 +41,10 @@ class Game:
 
         if (self.position_boss_1[0] - self.x) <= 15 and self.position_boss_1[1] == 105 and self.boss1_pts_vie != 0:
             self.proche_boss_1 = 2
+
         elif (self.position_boss_2[0] - self.x) <= 15 and self.y == 50 and self.boss2_pts_vie != 0:
             self.proche_boss_2 = 2
+
         elif (self.position_boss_3[0] - self.x) <= 15 and self.y == 15 and self.boss3_pts_vie != 0:
             self.proche_boss_3 = 2
 
@@ -87,8 +90,17 @@ class Game:
 
         if self.fond == 4:
             pyxel.bltm(0,0,4,0,0,248,248, 2)
-            pyxel.text(10, 50, "Bob le scaphandrier s'apprete a plonger, mais il n'a que 22 sec d'air, aide le à rejoindre la surface avant qu'il ne manque d'oxygène!", 0)
-            pyxel.text(10, 60, "Pour commencer le jeu : appuyer sur espace", 0)
+            pyxel.text(1, 57, "Bob va plonger,", 0)
+            pyxel.text(1, 65, " mais il n'a que 22 sec d'air,", 0)
+            pyxel.text(1, 73, "aide le a rejoindre la surface", 0)
+            pyxel.text(1, 81, "avant qu'il ne manque d'oxygene!", 0)     
+            pyxel.text(15, 113, "Appuyez sur espace", 0)
+            pyxel.text(1, 97, "Avancer/reculer: utiliser les flèches", 0)
+            pyxel.text(1, 105, "Attaque : appuyer sur espace", 0)
+
+        elif self.fond == 5:
+            pyxel.bltm(0,0, 1, 0, 0, 248, 248)
+            pyxel.blt(self.x, self.y_depart, 0, 0, 16, 16, 16, 2)
 
         elif self.fond == 1:
             pyxel.bltm(0, 0, 1, 0, 0, 248, 248 )
@@ -132,7 +144,6 @@ class Game:
             pyxel.blt(58, 58, 0, 80, 32, 16, 16, 2)
 
 
-
         if self.presence_epee == 2:
             if self.position_epee == 1:
                 pyxel.blt((self.x - 5), self.y, 0, 0, 64, -16,12, 2)
@@ -146,7 +157,13 @@ class Game:
     def update(self):
 
         if self.fond == 4 and pyxel.btn(KEY_SPACE):
-            self.fond = 1
+            self.fond = 5
+
+        elif self.fond == 5:
+            if int(pyxel.frame_count / 1) == (pyxel.frame_count / 1) and self.y_depart != self.y:
+                self.y_depart += 1
+            elif self.y == self.y_depart:
+                self.fond = 1
 
         if self.proche_boss_1 == 1 and self.proche_boss_2 == 1 and self.proche_boss_3 == 1:
             self.presence_epee = 1
@@ -160,7 +177,7 @@ class Game:
                 self.sortie_atteinte()
                 self.distance_boss()
 
-        if int(pyxel.frame_count / 30) == (pyxel.frame_count / 30) and self.fond != 4:
+        if int(pyxel.frame_count / 30) == (pyxel.frame_count / 30) and self.fond == 1:
             self.timer += 1
         if self.fond == 1:
             if self.timer == 22:
