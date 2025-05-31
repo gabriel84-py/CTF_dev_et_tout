@@ -90,13 +90,13 @@ class Game:
 
         if self.fond == 4:
             pyxel.bltm(0,0,4,0,0,248,248, 2)
-            pyxel.text(1, 57, "Bob va plonger,", 0)
-            pyxel.text(1, 65, " mais il n'a que 22 sec d'air,", 0)
-            pyxel.text(1, 73, "aide le a rejoindre la surface", 0)
-            pyxel.text(1, 81, "avant qu'il ne manque d'oxygene!", 0)     
-            pyxel.text(15, 113, "Appuyez sur espace", 0)
-            pyxel.text(1, 97, "Avancer/reculer: utiliser les flèches", 0)
-            pyxel.text(1, 105, "Attaque : appuyer sur espace", 0)
+            pyxel.text(4, 59, "Bob le scaphandrier va plonger", 0)
+            pyxel.text(4, 67, "Il n'a que 22 sec d'autonomie", 0)
+            pyxel.text(3, 75, "Aide le a passer les 3 niveaux", 0)
+            pyxel.text(4, 83, "avant qu'il ne manque d'air !", 0)     
+            pyxel.text(25, 121, "Appuyez sur espace", 0)
+            pyxel.text(5, 97, "Avancer : utiliser les fleches", 0)
+            pyxel.text(5, 105, "Attaquer : appuyer sur espace", 0)
 
         elif self.fond == 5:
             pyxel.bltm(0,0, 1, 0, 0, 248, 248)
@@ -165,7 +165,7 @@ class Game:
             elif self.y == self.y_depart:
                 self.fond = 1
 
-        if self.proche_boss_1 == 1 and self.proche_boss_2 == 1 and self.proche_boss_3 == 1:
+        if self.proche_boss_1 == 1 and self.proche_boss_2 == 1 and self.proche_boss_3 == 1 and self.fond != 5 :
             self.presence_epee = 1
             if pyxel.btn(pyxel.KEY_LEFT):
                 self.x -= 1
