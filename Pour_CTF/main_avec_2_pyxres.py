@@ -18,6 +18,9 @@ class Game:
         self.position_boss_1 = [90, 105]
         self.position_boss_2 = [90, 45]
         self.position_boss_3 = [90, 10]
+        self.y_boss_2 = 45
+        self.y_boss_3 = 10
+        self.y_boss_1 = 105
         self.boss_atteindre = self.position_boss_1
         self.x = 1
         self.y = 110
@@ -28,6 +31,7 @@ class Game:
         self.proche_boss_2 = 1
         self.proche_boss_3 = 1
         self.presence_epee = 1
+        self.style_epee = 1
         self.position_epee = 1
         self.costume = 0
         self.timer = 0
@@ -50,6 +54,12 @@ class Game:
 
     def attaque_boss(self):
         self.presence_epee = 2
+        if self.y == 110:
+            self.style_epee = 1
+        if self.y == 50:
+            self.style_epee = 2
+        if self.y == 15:
+            self.style_epee = 3
         if pyxel.btn(pyxel.KEY_SPACE):
             self.position_epee = 2
         if pyxel.btnr(pyxel.KEY_SPACE):
@@ -113,15 +123,15 @@ class Game:
 
 
             if self.boss1_pts_vie > 0:
-                pyxel.blt(90, 105, 0, 128, 16, 16, 16, 2)
+                pyxel.blt(90, self.y_boss_1, 0, 128, 16, 16, 16, 2)
 
 
             if self.boss2_pts_vie > 0:
-                pyxel.blt(90, 45, 0, 128, 16, 16, 16, 2)
+                pyxel.blt(90, self.y_boss_2, 0, 128, 16, 16, 16, 2)
 
 
             if self.boss3_pts_vie > 0:
-                pyxel.blt(90, 10, 0, 128, 16, 16, 16, 2)
+                pyxel.blt(90, self.y_boss_3, 0, 128, 16, 16, 16, 2)
 
 
             if self.costume == 0:
@@ -145,18 +155,29 @@ class Game:
 
 
         if self.presence_epee == 2:
+            
             if self.position_epee == 1:
-                pyxel.blt((self.x - 5), self.y, 0, 0, 64, -16,12, 2)
+                if self.style_epee == 1:
+                    pyxel.blt((self.x - 5), self.y, 0, 0, 64, -16,12, 2)
+                elif self.style_epee == 2:
+                    pyxel.blt((self.x - 7), self.y, 0, 16, 64, -16,16, 2)
+                elif self.style_epee == 3:
+                    pyxel.blt((self.x - 9), self.y, 0, 32, 64, -16,16, 2)
             elif self.position_epee == 2:
-                pyxel.blt((self.x + 5), self.y, 0, 0, 64, 12, 12, 2)
-
-
-
+                if self.style_epee == 1:
+                    pyxel.blt((self.x + 5), self.y, 0, 0, 64, 16,12, 2)
+                elif self.style_epee == 2:
+                    pyxel.blt((self.x + 6), self.y, 0, 16, 64, 16, 16, 2)
+                elif self.style_epee == 3:
+                    pyxel.blt((self.x + 7), self.y, 0, 32, 64, 16, 16, 2)
 
 
     def update(self):
 
-        if self.fond == 4 and pyxel.btn(KEY_SPACE):
+        if self.fond == 3:
+            self.presence_epee = 1
+            
+        elif self.fond == 4 and pyxel.btn(KEY_SPACE):
             self.fond = 5
 
         elif self.fond == 5:
@@ -176,6 +197,36 @@ class Game:
             if self.fond == 1:
                 self.sortie_atteinte()
                 self.distance_boss()
+                
+            if self.y_boss_1 == 105:
+                for i in range(5):
+                    if int(pyxel.frame_count / 5) == (pyxel.frame_count / 5):
+                        self.y_boss_1 -= 1
+            elif self.y_boss_1 == 100:
+                for i in range(5):
+                    if int(pyxel.frame_count / 5) == (pyxel.frame_count / 5):
+                        self.y_boss_1 += 1
+
+            if self.y == 50:
+                if self.y_boss_2 == 45:
+                    for i in range(5):
+                        if int(pyxel.frame_count / 5) == (pyxel.frame_count / 5):
+                            self.y_boss_2 -= 1
+                elif self.y_boss_2 == 40:
+                    for i in range(5):
+                        if int(pyxel.frame_count / 5) == (pyxel.frame_count / 5):
+                            self.y_boss_2 += 1
+
+            elif self.y == 15:
+                if self.y_boss_3 == 10:
+                    for i in range(5):
+                        if int(pyxel.frame_count / 5) == (pyxel.frame_count / 5):
+                            self.y_boss_3 -= 1
+
+                elif self.y_boss_3 == 5:
+                    for i in range(5):
+                        if int(pyxel.frame_count / 5) == (pyxel.frame_count / 5):
+                            self.y_boss_3 += 1
 
         if int(pyxel.frame_count / 30) == (pyxel.frame_count / 30) and self.fond == 1:
             self.timer += 1
