@@ -31,7 +31,6 @@ class Game:
         self.proche_boss_2 = 1
         self.proche_boss_3 = 1
         self.presence_epee = 1
-        self.style_epee = 1
         self.position_epee = 1
         self.costume = 0
         self.timer = 0
@@ -54,22 +53,16 @@ class Game:
 
     def attaque_boss(self):
         self.presence_epee = 2
-        if self.y == 110:
-            self.style_epee = 1
-        if self.y == 50:
-            self.style_epee = 2
-        if self.y == 15:
-            self.style_epee = 3
         if pyxel.btn(pyxel.KEY_SPACE):
             self.position_epee = 2
         if pyxel.btnr(pyxel.KEY_SPACE):
             self.position_epee = 1
             if self.y == 110:
-                self.boss1_pts_vie -= 10
+                self.boss1_pts_vie -= 20
             if self.y == 50:
                 self.boss2_pts_vie -= 10
             if self.y == 15:
-                self.boss3_pts_vie -= 10
+                self.boss3_pts_vie -= 5
 
 
         if self.boss1_pts_vie <= 0:
@@ -157,19 +150,9 @@ class Game:
         if self.presence_epee == 2:
             
             if self.position_epee == 1:
-                if self.style_epee == 1:
                     pyxel.blt((self.x - 5), self.y, 0, 0, 64, -16,12, 2)
-                elif self.style_epee == 2:
-                    pyxel.blt((self.x - 7), self.y, 0, 16, 64, -16,16, 2)
-                elif self.style_epee == 3:
-                    pyxel.blt((self.x - 9), self.y, 0, 32, 64, -16,16, 2)
             elif self.position_epee == 2:
-                if self.style_epee == 1:
                     pyxel.blt((self.x + 5), self.y, 0, 0, 64, 16,12, 2)
-                elif self.style_epee == 2:
-                    pyxel.blt((self.x + 6), self.y, 0, 16, 64, 16, 16, 2)
-                elif self.style_epee == 3:
-                    pyxel.blt((self.x + 7), self.y, 0, 32, 64, 16, 16, 2)
 
 
     def update(self):
