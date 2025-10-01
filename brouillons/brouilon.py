@@ -1,5 +1,8 @@
-from faker import Faker
+def volume(initi, n):
+    v = initi
+    for i in range(n):
+        v = v * 0.97 + 1.2
+    return v
 
-fake = Faker(locale='fr_FR')
-
-print(fake.name())
+assert volume(52,1) == 51.64
+assert volume(52,5) == 50.304808308400006
